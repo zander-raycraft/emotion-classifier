@@ -29,7 +29,7 @@ def construct_network():
         keras.layers.Dropout(0.5),
         keras.layers.Dense(7, activation='softmax')
     ])
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=tf.keras.optimizers.Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
     return model
 
 def save_keras_model(model):

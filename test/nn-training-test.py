@@ -56,7 +56,7 @@ def test_construct_network():
     assert model.layers[0].input_shape == (None, 48, 48, 1)
     assert len(model.layers) == 8
     # Check against Adam optimizer
-    assert isinstance(model.optimizer, tf.keras.optimizers.legacy.Adam)
+    assert isinstance(model.optimizer, tf.keras.optimizers.Adam)
     assert model.loss == 'categorical_crossentropy'
     assert 'accuracy' in model.compiled_metrics._metrics
 
