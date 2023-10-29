@@ -1,0 +1,6 @@
+venv/
+data/
+test/__pycache__
+NN_training/__pycache__
+test/.pytest_cache
+.idea
