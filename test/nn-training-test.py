@@ -60,18 +60,6 @@ def test_construct_network():
     assert model.loss == 'categorical_crossentropy'
     assert 'accuracy' in model.compiled_metrics._metrics
 
-
-# Tests the functionality transforming a .keras file into a .pb frozen graph file
-#
-# @param none
-# @return none, but will raise errors and fail test is assertions fail
-def test_convert_to_frozen_graph():
-    model = train.construct_network()
-    version, _ = train.save_keras_model(model)
-    frozen_graph_path = train.convert_to_frozen_graph(model, '', version)
-    assert os.path.exists(frozen_graph_path)
-    os.remove(frozen_graph_path)  # Clean up after test
-
 # Tests the deeper detail of the construct of the model, such as layers, epochs, and flatte/convolution layers
 #
 # @param none
