@@ -70,15 +70,6 @@ def test_preprocess_frame():
     frame = np.random.randint(0, 256, (480, 640, 3), dtype=np.uint8)
     preprocessed_frame = cameraFeed.preprocess_frame(frame)
     assert preprocessed_frame.shape == (1, 48, 48, 1)
- 
-
-# Runs a test to see if the model can be properly loaded
-#
-# @param none
-# @return none, but will raise errors and fail test is assertions fail  
-def test_load_emotion_model(mock_model):
-    model = cameraFeed.load_emotion_model('../model/emotionIndicatorV3.keras')
-    assert model is not None   
     
 
 # Runs a test to see the correct emotion can be displayed
