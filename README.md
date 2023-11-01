@@ -3,7 +3,7 @@
 ![Production Status](https://img.shields.io/badge/Production%20State-In%20Progress-orange)
 
 <h2>Description</h2>
-This project is a ML-based emotion classifier meant to demonstrate my proficiency with multiple Python machine libraries and TensorFlow's C++ package, as well as my ability to construct and fit a neural network to data. This high-level idea is that this program connects to a device that feeds in a stream of input, such as a laptop camera, and takes that input and uses the model to predict what emotion is being expressed by the stream. 
+This project is a ML-based emotion classifier meant to demonstrate my proficiency with multiple Python machine learning libraris, as well as my ability to construct and fit a neural network to data. This high-level idea is that this program connects to a device that feeds in a stream of input, such as a laptop camera, and takes that input and uses the model to predict what emotion is being expressed by the stream. 
 
 The Model training and construction are built in Python while the Camera interaction is built in C++ for faster processing times.
 
