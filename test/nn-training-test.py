@@ -2,9 +2,15 @@ import pytest
 import pandas as pd
 import numpy as np
 from NN_training import train
+from src import cameraFeed
 import io
 import os
 import tensorflow as tf
+import pytest
+from unittest.mock import Mock, patch
+import cv2
+import numpy as np
+
 
 # Mock data and utilities
 zeroes = " ".join(["0"] * 2304)
@@ -19,6 +25,70 @@ MOCK_CSV_DATA = f"""emotion,pixels
 6,{zeroes}
 """
 
+
+# creaes a mock model of the neural network
+#
+# @param none
+# @return model, the mocked model to be used
+@pytest.fixture
+def mock_model():
+    model = Mock()
+    model.predict.return_value = np.array([[1, 0, 0, 0, 0, 0, 0]])  # Mock prediction for 'Angry'
+    return model
+
+
+# Mocks stream capture from camera
+@pytest.fixture
+def mock_capture():
+    class MockCapture:
+        def __init__(self, is_opened=True):
+            self._is_opened = is_opened
+        def isOpened(self):
+            return self._is_opened
+        def read(self):
+            # Return a mock frame which is a black image and a ret value
+            return True, np.zeros((48, 48, 3), dtype=np.uint8)
+        def release(self):
+            pass
+    return MockCapture()
+    
+# Utilizes the made class to simulate a stream capture
+#
+# @param none
+# @return none, but will raise errors and fail test is assertions fail
+@pytest.fixture
+def mock_video_capture(mock_capture):
+    with patch('cv2.VideoCapture', return_value=mock_capture) as mocked_capture:
+        yield mocked_capture
+
+
+# Runs a test to see the stream frames can be preprocessed for the neural network
+#
+# @param none
+# @return none, but will raise errors and fail test is assertions fail  
+def test_preprocess_frame():
+    frame = np.random.randint(0, 256, (480, 640, 3), dtype=np.uint8)
+    preprocessed_frame = cameraFeed.preprocess_frame(frame)
+    assert preprocessed_frame.shape == (1, 48, 48, 1)
+ 
+
+# Runs a test to see if the model can be properly loaded
+#
+# @param none
+# @return none, but will raise errors and fail test is assertions fail  
+def test_load_emotion_model(mock_model):
+    model = cameraFeed.load_emotion_model('../model/emotionIndicatorV3.keras')
+    assert model is not None   
+    
+
+# Runs a test to see the correct emotion can be displayed
+#
+# @param none
+# @return none, but will raise errors and fail test is assertions fail  
+def test_display_emotion():
+    frame = np.zeros((480, 640, 3), dtype=np.uint8)
+    emotion_label = 'Happy'
+    cameraFeed.display_emotion(frame, emotion_label)
 
 # establishes a mock_read to prevent an infinite recursion edge case for the CSV parser test - Helper function
 #
