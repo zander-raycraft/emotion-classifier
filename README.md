@@ -5,7 +5,7 @@
 <h2>Description</h2>
 This project is a ML-based emotion classifier meant to demonstrate my proficiency with multiple Python machine learning libraris, as well as my ability to construct and fit a neural network to data. This high-level idea is that this program connects to a device that feeds in a stream of input, such as a laptop camera, and takes that input and uses the model to predict what emotion is being expressed by the stream. 
 
-The Model training and construction are built in Python while the Camera interaction is built in C++ for faster processing times.
+The Model training and construction are built using Python3 tensorflows Keras and the camera stream is preprocesssed for the model thanks to the c compilation of the numpy Pyton3 package.
 
 
 <h2>To run</h2>
