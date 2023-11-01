@@ -3,4 +3,4 @@ keras==2.14.0
 pandas==2.1.2
 numpy==1.26.1
 pytest==7.4.3
-opencv-python==4.8.1
+opencv-python==4.8.1.78
